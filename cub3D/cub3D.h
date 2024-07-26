@@ -4,9 +4,9 @@
 typedef int	t_fd;
 
 typedef struct s_rgb{
-	unsinged char	r;
-	unsinged char	g;
-	unsinged char	b;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 }	t_rgb;
 
 typedef struct s_info{
@@ -21,4 +21,28 @@ typedef struct s_info{
 	int			vert;
 }	t_info;
 
+typedef struct s_point{
+	double	x;
+	double	y;
+}	t_point;
+
+typedef struct s_user{
+	t_point	pos;
+	t_point	dir;
+	t_point	camera;
+}	t_user;
+
+typedef struct s_data{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data;
+
+typedef struct s_mlx{
+	void	*mlx;
+	void	*mlx_win;
+	t_data	img;
+}	t_mlx;
 #endif
