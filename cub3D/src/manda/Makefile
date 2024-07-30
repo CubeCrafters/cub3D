@@ -7,9 +7,11 @@ endif
 
 NAME := cub3d
 SRCS := main.c	\
+		init.c	\
 
 # SRCS(in SRCDIR) ------
-DIRS := raycasting
+DIRS := raycasting	\
+		utils	\
 
 SUBS := $(addsuffix .a,$(DIRS))
 

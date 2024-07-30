@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
+
+//벡터 회전
 void	rotate_point(t_point *p, double theta)
 {
 	const double	tmp_x = p->x;

@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <mlx.h>
 #include <unistd.h>
-#include "../../../cub3D.h"
+#include "../cub3D.h"
 #include "matrix.h"
 #include <stdlib.h>
 #include <math.h>
-
+#include <sys/time.h>
 
 static void	verLine(t_info *info, int x, int drawStart, int drawEnd, unsigned char color){
 	for(int i = drawStart; i<= drawEnd; i++)
@@ -23,9 +23,10 @@ void ray_casting(t_info *info)
 
 	t_point plane = getpuv(info->user->dir);
 	double planeX = plane.x;
-	double planeY = plane.y;		// asdf
+	double planeY = plane.y;
 	// double time = 0;	// time of current frame
 	// double oldTime = 0; // time of previous frame
+	// struct timeval	tv;
 	double rayDirX;
 	double rayDirY;
 	for (int x = 0; x < SCREEN_WIDTH; x++)
@@ -112,15 +113,9 @@ void ray_casting(t_info *info)
 		if (drawEnd >= SCREEN_HEIGHT)
 			drawEnd = SCREEN_HEIGHT - 1;
 		unsigned char color = 0x0000ff;
-		// give x and y sides different brightness
 		if (side == 1)
-		{
 			color = 0x000088;
-		}
-
-		// draw the pixels of the stripe as a vertical line
 		verLine(info, x, drawStart, drawEnd, color);
 	}
-	mlx_put_image_to_window(info->mlx, info->mlx_win, info->img.img, 0, 0);
-	mlx_loop(info->mlx);
+	
 }

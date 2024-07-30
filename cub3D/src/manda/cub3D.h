@@ -4,6 +4,11 @@
 #define SCREEN_HEIGHT	640
 #define SCREEN_WIDTH	640
 
+#define KEY_ESC			53
+#define KEY_W			13
+#define KEY_A			0
+#define KEY_S			1
+#define KEY_D			2
 
 typedef int	t_fd;
 
@@ -50,8 +55,8 @@ typedef struct s_info{
 	t_user		*user;
 }	t_info;
 
-
-
+void	init_info(t_info *info);
+void draw(t_info *info);
 
 
 #endif
