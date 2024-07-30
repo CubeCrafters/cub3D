@@ -11,16 +11,27 @@ void	rotate_point(t_point *p, double theta)
 	p->y = tmp_x * sin(theta) + tmp_y * cos(theta);
 }
 
-// t_mat2	init_mat2(double a1, double a2, double b1, double b2){
-// 	t_mat2	ret_mat;
+//기존 벡터와 수직인 단위벡터 반환
+t_point	getpuv(t_point vec)
+{
+	t_point			unitvector;
+	const double	x = vec.x;
+	const double	y = vec.y;
+	const double	length = sqrt(x * x + y * y);
 
-// 	ret_mat = (double **)malloc(sizeof)
-// 	ret_mat[0][0] = a1;
-// 	ret_mat[0][1] = a2;
-// 	ret_mat[1][0] = b1;
-// 	ret_mat[1][1] = b2;
-// 	return (ret_mat);
-// }
+	if (length == 0)
+	{
+		unitvector.x = 0;
+		unitvector.y = 0;
+	}
+	else
+	{
+		unitvector.x = -y / length;
+		unitvector.y = x / length;
+	}
+	return (unitvector);
+}
+
 
 t_point	*init_point(double x, double y){
 	t_point	*new_point;

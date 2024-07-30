@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <mlx.h>
 #include <unistd.h>
@@ -58,30 +57,32 @@ void	draw_map(void *mlx, void *mlx_win, t_data *img){
 }
 
 
-int	draw_user(t_user me,t_data *img){
+int	draw_user(t_info *info)
+{
 	double	grad;
 
-	double my_x = me.pos.x * 50 + 25;
-	double my_y = me.pos.y * 50 + 25;
-	my_mlx_pixel_put(img, my_x, my_y, 0xFF0000);
+	t_user	user = *info->user;
+	double my_x = user.pos.x * 50 + 25;
+	double my_y = user.pos.y * 50 + 25;
+	my_mlx_pixel_put(&info->img, my_x, my_y, 0xFF0000);
 	
-	if(me.dir.x == 0){
+	if(user.dir.x == 0){
 
 	}
 	else{
-		rotate_point(&me.dir, -M_PI/6);
+		rotate_point(&user.dir, -M_PI/6);
 		for(int j = 0; j <60;j++ ){
-			grad = me.dir.y / me.dir.x;
+			grad = user.dir.y / user.dir.x;
 			for (int i = my_x; i< 25 * 50;i++)
 			{
 				if (maze[(int)(grad * (i - my_x) + my_y) / 50][i / 50] == 1)
 				{	
-					my_mlx_pixel_put(img, i, (grad * (i - my_x) + my_y), 0xFFFFFF);
+					my_mlx_pixel_put(&info->img, i, (grad * (i - my_x) + my_y), 0xFFFFFF);
 					break ;
 				}
-				my_mlx_pixel_put(img, i, grad * (i - my_x) + my_y, 0xFF0000);
+				my_mlx_pixel_put(&info->img, i, grad * (i - my_x) + my_y, 0xFF0000);
 			}
-			rotate_point(&me.dir, M_PI/180);
+			rotate_point(&user.dir, M_PI/180);
 		}
 	}
 	return (0);
@@ -99,60 +100,62 @@ void	exit_msg(const char *str)
 	exit(1);
 }
 
-t_mlx	*init_mlx_datas()
+void	init_mlx_datas(t_info *info)
 {
-	t_mlx	*datas;
+	void	*mlx;
+	void	*mlx_win;
+	t_data	img;
 
-	datas = (t_mlx *)malloc(sizeof(t_mlx));
-	if (datas == NULL)
+	mlx = mlx_init();
+	if (mlx == NULL)
 		exit_msg("mlx error\n");
-	datas->mlx = mlx_init();
-	if (datas->mlx == NULL)
+	mlx_win = mlx_new_window(mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Hello world!");
+	if (mlx_win == NULL)
 		exit_msg("mlx error\n");
-	datas->mlx_win = mlx_new_window(datas->mlx, 25 * 50, 12 * 50, "Hello world!");
-	if (datas->mlx_win == NULL)
+	img.img = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	if (img.img == NULL)
 		exit_msg("mlx error\n");
-	datas->img.img = mlx_new_image(datas->mlx, 25 * 50, 12 * 50);
-	if (datas->img.img == NULL)
-		exit_msg("mlx error\n");
-	datas->img.img = mlx_new_image(datas->mlx, 25 * 50, 12 * 50);
-	datas->img.addr = mlx_get_data_addr(datas->img.img, &(datas->img).bits_per_pixel, \
-	&datas->img.line_length, &datas->img.endian);
-	return (datas);
+	img.img = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	img.addr = mlx_get_data_addr(img.img, &(img).bits_per_pixel, \
+	&img.line_length, &img.endian);
+	info->mlx = mlx;
+	info->mlx_win = mlx_win;
+	info->img = img;
+	info->map = maze;
 }
 
-int	move_user(t_user *me, int dir)
+int	move_user(t_user *user, int dir)
 {
-	me->pos.x += dir * me->dir.x;
-	me->pos.y += dir * me->dir.y;
-	printf("x : %lf, y : %lf\n", me->pos.x, me->pos.y);
+	user->pos.x += dir * user->dir.x;
+	user->pos.y += dir * user->dir.y;
+	printf("x : %lf, y : %lf\n", user->pos.x, user->pos.y);
 	return (0);
 }
 
-int	rotate_user(t_user *me, int dir)
+int	rotate_user(t_user *user, int dir)
 {
-	rotate_point(&me->dir, dir * M_PI/18);
+	rotate_point(&user->dir, dir * M_PI/18);
 	return (0);
 }
 
-// void	set_keys(t_mlx *mlx_data, t_user *me)
+// void	set_keys(t_mlx *mlx_data, t_user *user)
 // {
-// 	mlx_hook(mlx_data->mlx_win, 13, 0, move_user, me);
-// 	mlx_hook(mlx_data->mlx_win, 0, 0, rotate_user, me);
-// 	mlx_hook(mlx_data->mlx_win, 1, 0, move_user, me);
-// 	mlx_hook(mlx_data->mlx_win, 2, 0, rotate_user, me);
+// 	mlx_hook(mlx_data->mlx_win, 13, 0, move_user, user);
+// 	mlx_hook(mlx_data->mlx_win, 0, 0, rotate_user, user);
+// 	mlx_hook(mlx_data->mlx_win, 1, 0, move_user, user);
+// 	mlx_hook(mlx_data->mlx_win, 2, 0, rotate_user, user);
 // }
 
-int	key_press(int keycode, t_user *me)
+int	key_press(int keycode, t_user *user)
 {
 	if (keycode == 13)
-		move_user(me, 1);
+		move_user(user, 1);
 	else if (keycode == 0)
-		rotate_user(me, 1);
+		rotate_user(user, 1);
 	else if (keycode == 1)
-		move_user(me, -1);
+		move_user(user, -1);
 	else if (keycode == 2)
-		rotate_user(me, -1);
+		rotate_user(user, -1);
 	else if (keycode == 53)
 		exit(0);
 	return (0);
@@ -173,16 +176,21 @@ t_user	*set_user(double pos_x, double pos_y, double dir_x, double dir_y)
 }
 
 void test(){
-	t_mlx	*mlx_data;
-	t_user	*me;
+	t_user	*user;
+	t_info	*info;
 
-	mlx_data = init_mlx_datas();
-	me = set_user(4.0, 1.0, 2.0, 1.0);
-	mlx_key_hook(mlx_data->mlx_win, key_press, &me);
-	mlx_hook(mlx_data->mlx_win, DESTROY_NOTIFY, 0, close_window, (void *)0);
-	draw_map(mlx_data->mlx, mlx_data->mlx_win, &(mlx_data->img));
-	draw_user(*me, &(mlx_data->img));
-	mlx_put_image_to_window(mlx_data->mlx, mlx_data->mlx_win, mlx_data->img.img, 0, 0);
-	//mlx_loop_hook(mlx_data->mlx, draw_user, &me);
-	mlx_loop(mlx_data->mlx);
+	//-------------not here--------------------------
+	info = (t_info *)malloc(sizeof(t_info));
+	//-------------not here--------------------------
+	init_mlx_datas(info);
+	user = set_user(4.0, 1.0, 0.0, 1.0);
+	info->user = user;
+	//mlx_key_hook(info->mlx, key_press, &user);
+	ray_casting(info);
+	mlx_hook(info->mlx_win, DESTROY_NOTIFY, 0, close_window, (void *)0);
+	draw_map(info->mlx, info->mlx_win, &(info->img));
+	draw_user(info);
+	mlx_put_image_to_window(info->mlx, info->mlx_win, info->img.img, 0, 0);
+	//mlx_loop_hook(info->mlx, draw_user, &info);
+	mlx_loop(info->mlx);
 }

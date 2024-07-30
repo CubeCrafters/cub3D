@@ -9,6 +9,7 @@ NAME := raycasting.a
 HEAD := matrix.h
 SRCS := test.c \
 		matrix.c \
+		raycasting.c \
 
 LDLIBS := -lft
 
