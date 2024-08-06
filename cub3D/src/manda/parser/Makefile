@@ -5,10 +5,13 @@ ifndef SRCDIR
 	SRCDIR = $(abspath ../)
 endif
 
-NAME := envlist.a
-HEAD := envlist.h
-SRCS := envlist.c \
-		envlist_util.c \
+NAME := parser.a
+HEAD := parser.h
+SRCS := cd_gnl.c \
+		identifiers.c \
+		parser_util.c \
+		read_arg.c \
+		valid_info.c \
 
 LDLIBS := -lft
 

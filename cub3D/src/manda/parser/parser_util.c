@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   parser_util.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 11:09:56 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/01 14:22:09 by inryu            ###   ########.fr       */
+/*   Created: 2024/08/01 13:23:28 by inryu             #+#    #+#             */
+/*   Updated: 2024/08/01 13:24:03 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser.h"
 
-size_t	ft_strlen(const char *str)
+int	cd_iscolor(int c)
 {
-	size_t	i;
-
-	i = 0;
-	while (str && str[i])
-		i++;
-	return (i);
+	if (0 <= c && c <= 255)
+		return (1);
+	return (0);
 }

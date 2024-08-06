@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 11:09:56 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/01 14:22:09 by inryu            ###   ########.fr       */
+/*   Created: 2024/08/01 13:31:46 by inryu             #+#    #+#             */
+/*   Updated: 2024/08/01 13:31:52 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 
-size_t	ft_strlen(const char *str)
+void	free_strings(char **d)
 {
-	size_t	i;
+	int	i;
 
+	if (!d)
+		return ;
 	i = 0;
-	while (str && str[i])
+	while (d[i])
+	{
+		free(d[i]);
 		i++;
-	return (i);
+	}
+	free(d);
 }

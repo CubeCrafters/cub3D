@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: taerakim <taerakim@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/08 20:16:55 by taerakim          #+#    #+#              #
-#    Updated: 2024/03/08 20:17:36 by taerakim         ###   ########.fr        #
+#    Updated: 2024/08/01 13:34:36 by inryu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,8 @@ SRCS := ft_malloc.c \
 		ft_lstclear.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
+		free.c \
+		ft_strcmp.c \
 
 include $(TOPDIR)/include_make/Variable.mk
 include $(TOPDIR)/include_make/Link.mk

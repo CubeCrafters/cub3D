@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   valid_info.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 11:09:56 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/01 14:22:09 by inryu            ###   ########.fr       */
+/*   Created: 2024/08/01 16:57:27 by inryu             #+#    #+#             */
+/*   Updated: 2024/08/06 09:08:36 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser.h"
 
-size_t	ft_strlen(const char *str)
+void	valid_info(t_info *info)
 {
-	size_t	i;
-
-	i = 0;
-	while (str && str[i])
-		i++;
-	return (i);
+	(void)info;
 }
