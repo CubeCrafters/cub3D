@@ -1,6 +1,7 @@
 #include "../cub3D.h"
 #include "utils.h"
 #include <stdlib.h>
+#include <mlx.h>
 // int	key_press(int keycode, t_user *user)
 // {
 // 	if (keycode == 13)
@@ -16,8 +17,9 @@
 // 	return (0);
 // }
 
-int	close_window(void)
+int	close_window(t_info *info)
 {
+	mlx_destroy_window(info->mlx, info->mlx_win);
 	exit(0);
 	return (0);
 }

@@ -1,6 +1,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+#include <sys/time.h>
+
 #define SCREEN_HEIGHT	640
 #define SCREEN_WIDTH	640
 
@@ -39,20 +41,23 @@ typedef struct s_user{
 }	t_user;
 
 typedef struct s_info{
-	t_fd		no;
+	t_fd		no;	//void *
 	t_fd		so;
 	t_fd		ea;
 	t_fd		we;
 	t_rgb		floor;
 	t_rgb		ceiling;
-	//int			**map;
-	int     (*map)[25];
+	//int			**map;	//char *
+	int     (*map)[25];	//char *
 	int			hori;
 	int			vert;
 	void		*mlx;
 	void		*mlx_win;
 	t_data		img;
 	t_user		*user;
+	double		movespeed;
+	double		rotspeed;
+	struct timeval time;
 }	t_info;
 
 void	init_info(t_info *info);

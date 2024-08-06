@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 
+
 int maze[12][25] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -54,7 +55,6 @@ static void	init_mlx_datas(t_info *info)
 	img.img = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (img.img == NULL)
 		exit_msg("mlx error\n");
-	img.img = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &(img).bits_per_pixel, \
 	&img.line_length, &img.endian);
 	info->mlx = mlx;
@@ -70,4 +70,5 @@ void	init_info(t_info *info)
 	init_mlx_datas(info);
 	user = set_user(4.0, 1.0, 0.0, 1.0);//parse
 	info->user = user;
+	gettimeofday(&info->time, NULL);
 }

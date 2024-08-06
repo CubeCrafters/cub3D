@@ -3,6 +3,6 @@
 
 #define DESTROY_NOTIFY	17
 
-int	close_window(void);
+int	close_window(t_info *info);
 
 #endif
