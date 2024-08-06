@@ -6,7 +6,7 @@
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:24:26 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/06 09:08:28 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/06 14:06:29 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,12 @@ void	read_arg(char **av, t_info *info)
 	into_d(head, info);
 	ft_lstclear(&head, del);
 	close(arg);
-	valid_info(info);
+	valid_map(info->map);
+	int	i;
+	i = 0;
+	while(i < info->vert)
+	{
+		printf("[%s]\n", info->map[i]);
+		i++;
+	}
 }

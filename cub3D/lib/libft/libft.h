@@ -6,7 +6,7 @@
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:34:08 by taerakim          #+#    #+#             */
-/*   Updated: 2024/08/01 14:20:36 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/06 09:53:12 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-void	free_strings(char **d);
-int		ft_strcmp(char *s1, char *s2);
 
 #endif
