@@ -1,0 +1,1 @@
+/Users/inryu/Desktop/tt/cub3D/src/manda/parser/parser.h

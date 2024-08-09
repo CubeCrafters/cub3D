@@ -6,7 +6,7 @@
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:57:27 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/09 09:58:08 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/09 10:33:27 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ int	check_sides(int i, int j, t_info *info)
 {
 	char **map;
 
+	if (i == 0 || i == info->vert - 1)
+		return (0);
+	else if (j == 0 || j == info->hori - 1)
+		return (0);
 	map = info->map;
 	if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ')
 		return (0);
@@ -34,15 +38,12 @@ int	check_cell(int i, int j, t_info *info, t_check *ch)
 
 	c = info->map[i][j];
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
-		(ch->s)++;
-	else if (c == '0')
 	{
-		if (i == 0 || i == info->vert - 1)
-			return (0);
-		else if (j == 0 || j == info->hori - 1)
-			return (0);
+		(ch->s)++;
 		return (check_sides(i, j, info));
 	}
+	else if (c == '0')
+		return (check_sides(i, j, info));
 	else if (c != ' ' && c != '1')
 		print_error("there is a legend that is not included in the PDF");
 	return (1);
