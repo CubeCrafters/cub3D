@@ -6,13 +6,13 @@
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:24:26 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/06 14:06:29 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/09 10:09:03 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	check_extension(char *file)
+int	check_extension(char *file)
 {
 	int	len;
 
@@ -21,6 +21,7 @@ void	check_extension(char *file)
 		print_error("file with the .cub extension only");
 	if (ft_strncmp(file + (len - 4), ".cub", 4))
 		print_error("file with the .cub extension only");
+	return (open(file, O_RDONLY));
 }
 
 void	into_d(t_list *head, t_info *info)
@@ -30,7 +31,7 @@ void	into_d(t_list *head, t_info *info)
 	t_list	*cur;
 
 	info->vert--;
-	info->map = ft_calloc(info->vert, sizeof(char **));
+	info->map = ft_calloc(info->vert + 1, sizeof(char **));
 	i = 0;
 	cur = head;
 	while (i < info->vert)
@@ -77,8 +78,7 @@ void	read_arg(char **av, t_info *info)
 	t_list	*head;
 	t_check	ch;
 
-	check_extension(av[1]);
-	arg = open(av[1], O_RDONLY);
+	arg = check_extension(av[1]);
 	if (arg < 0)
 		print_error("File open failed");
 	ft_bzero(&ch, sizeof(t_check));
@@ -96,12 +96,6 @@ void	read_arg(char **av, t_info *info)
 	into_d(head, info);
 	ft_lstclear(&head, del);
 	close(arg);
-	valid_map(info->map);
-	int	i;
-	i = 0;
-	while(i < info->vert)
-	{
-		printf("[%s]\n", info->map[i]);
-		i++;
-	}
+	if (valid_map(info, &ch) == 0)
+		print_error("Map must be surrounded by walls");
 }
