@@ -1,9 +1,9 @@
 NO ./test1.xpm
 SO ./test2.xpm
 WE ./test3.xpm
-EA ./test1.xpm
+EA ./test4.xpm
 
-F 220,100,0
+F 0,255,0
 C 225,30,0
 
         1111111111111111111111111

@@ -6,7 +6,7 @@
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:57:27 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/09 10:33:27 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/09 12:20:30 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,33 @@ int	valid_map(t_info *info, t_check *ch)
 	if (ch->s != 1)
 		print_error("Map must contain 1 starting position");
 	return (1);
+}
+
+void	check_info(t_info *info, t_check *ch)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 3)
+	{
+		j = i + 1;
+		while (j < 4)
+		{
+			if (ft_strcmp(ch->img[i], ch->img[j]) == 0)
+				print_error("The wall texture is duplicated");
+			j++;
+		}
+		i++;
+	}
+	get_img(info, ch);
+	if (info->ceiling == info->floor)
+		print_error("The color is duplicated");
+}
+
+void	valid_info(t_info *info, t_check *ch)
+{
+	check_info(info, ch);
+	if (valid_map(info, ch) == 0)
+		print_error("Map must be surrounded by walls");
 }

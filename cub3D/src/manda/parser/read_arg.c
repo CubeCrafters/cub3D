@@ -6,7 +6,7 @@
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:24:26 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/09 10:09:03 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/09 11:32:29 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,5 @@ void	read_arg(char **av, t_info *info)
 	into_d(head, info);
 	ft_lstclear(&head, del);
 	close(arg);
-	if (valid_map(info, &ch) == 0)
-		print_error("Map must be surrounded by walls");
+	valid_info(info, &ch);
 }

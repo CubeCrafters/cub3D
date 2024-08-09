@@ -6,7 +6,7 @@
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:56:54 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/09 09:33:09 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/09 11:36:34 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ typedef struct s_check
 	bool	f;
 	bool	c;
 	int		s;
-	int		wid;
-	int		hei;
+	char	*img[4];
 }			t_check;
 
 char	*get_next_line(int fd);
@@ -35,6 +34,7 @@ void	identifiers(char *s, t_info *info, t_check *ch);
 int		cd_iscolor(int c);
 void	free_strings(char **d);
 int		ft_strcmp(char *s1, char *s2);
-int		valid_map(t_info *info, t_check *ch);
+void	get_img(t_info *info, t_check *ch);
+void	valid_info(t_info *info, t_check *ch);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:14:03 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/06 14:16:17 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/09 12:20:43 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 bool	get_color(char *s, t_info *info, char c)//컬러 포맷 바꾸기, 컬러 안 같게 막기
 {
-	char			**tmp;
-	int				i;
-	unsigned char	rgb[3];
+	char	**tmp;
+	int		i;
+	int		rgb[3];
 
 	tmp = ft_split(s, ',');
 	i = 0;
@@ -30,17 +30,9 @@ bool	get_color(char *s, t_info *info, char c)//컬러 포맷 바꾸기, 컬러 �
 	if (i != 3)
 		print_error(NULL);
 	if (c == 'f')
-	{
-		info->floor.r = rgb[0];
-		info->floor.g = rgb[1];
-		info->floor.b = rgb[2];
-	}
+		info->floor = rgb[0] * 256 * 256 + rgb[1] * 256 + rgb[2];
 	else
-	{
-		info->ceiling.r = rgb[0];
-		info->ceiling.g = rgb[1];
-		info->ceiling.b = rgb[2];
-	}
+		info->ceiling = rgb[0] * 256 * 256 + rgb[1] * 256 + rgb[2];
 	free_strings(tmp);
 	return (1);
 }
@@ -49,18 +41,12 @@ void	identifiers_we(char **d, t_info *info, t_check *ch)
 {
 	if (ft_strncmp(d[0], "WE", 2) == 0 && ch->we == 0)
 	{
-		info->we = mlx_xpm_file_to_image(info->mlx, ft_strtrim(d[1], "\n"), \
-										&ch->wid, &ch->hei);
-		if (!(info->we))
-			print_error("loading image failed");
+		ch->img[2] = ft_strtrim(d[1], "\n");
 		ch->we = 1;
 	}
 	else if (ft_strncmp(d[0], "EA", 2) == 0 && ch->ea == 0)
 	{
-		info->ea = mlx_xpm_file_to_image(info->mlx, ft_strtrim(d[1], "\n"), \
-										&ch->wid, &ch->hei);
-		if (!(info->ea))
-			print_error("loading image failed");
+		ch->img[3] = ft_strtrim(d[1], "\n");
 		ch->ea = 1;
 	}
 	else if (ft_strncmp(d[0], "F", 1) == 0 && ch->f == 0)
@@ -80,18 +66,12 @@ void	identifiers(char *s, t_info *info, t_check *ch)//같은 파일 여러번 �
 		;
 	else if (ft_strncmp(d[0], "NO", 2) == 0 && ch->no == 0)
 	{
-		info->no = mlx_xpm_file_to_image(info->mlx, ft_strtrim(d[1], "\n"), \
-										&ch->wid, &ch->hei);
-		if (!(info->no))
-			print_error("loading image failed");
+		ch->img[0] = ft_strtrim(d[1], "\n");
 		ch->no = 1;
 	}
 	else if (ft_strncmp(d[0], "SO", 2) == 0 && ch->so == 0)
 	{
-		info->so = mlx_xpm_file_to_image(info->mlx, ft_strtrim(d[1], "\n"), \
-										&ch->wid, &ch->hei);
-		if (!(info->so))
-			print_error("loading image failed");
+		ch->img[1] = ft_strtrim(d[1], "\n");
 		ch->so = 1;
 	}
 	else
