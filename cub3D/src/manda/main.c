@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:13:41 by taerakim          #+#    #+#             */
-/*   Updated: 2024/08/09 10:01:41 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/11 19:17:43 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3D.h"
+
+#include <stdio.h>
+void	cub3d_log(t_info *info){
+	printf("%d : \n",info->hori);
+	printf("%d : \n",info->vert);
+	for(int i = 0; i<info->vert;i++){
+		for(int j = 0 ;j < info->hori;j++){
+			printf("%c",info->map[i][j]);
+		}
+		printf("\n");
+	}
+}
 
 void	print_error(char *s)
 {
@@ -47,6 +59,7 @@ int main(int ac, char **av)
 	if (info.mlx == NULL)
 		return(1);
 	read_arg(av, &info);
+	cub3d_log(&info);
 	info.win = mlx_new_window(info.mlx, 100, 100, "Hello world!");
 	if (info.win == NULL)
 		printf("!!!!!");//
