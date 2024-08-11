@@ -6,10 +6,12 @@ ifndef SRCDIR
 endif
 
 NAME := cub3d
-SRCS := main.c \
+SRCS := main.c	\
+		init.c	\
 
 # SRCS(in SRCDIR) ------
-DIRS := parser
+DIRS := raycasting	\
+		utils	\
 
 SUBS := $(addsuffix .a,$(DIRS))
 
