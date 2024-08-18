@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_arg.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:24:26 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/09 11:32:29 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/18 16:32:14 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,5 @@ void	read_arg(char **av, t_info *info)
 	ft_lstclear(&head, del);
 	close(arg);
 	valid_info(info, &ch);
+	gettimeofday(&info->time, NULL);
 }

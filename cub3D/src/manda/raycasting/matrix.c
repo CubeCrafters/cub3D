@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 //벡터 회전
-void	rotate_point(t_point *p, double theta)
+void	rotate_point(t_dpoint *p, double theta)
 {
 	const double	tmp_x = p->x;
 	const double	tmp_y = p->y;
@@ -14,9 +14,9 @@ void	rotate_point(t_point *p, double theta)
 }
 
 //기존 벡터와 수직인 단위벡터 반환
-t_point	getpuv(t_point vec)
+t_dpoint	getpuv(t_dpoint vec)
 {
-	t_point			unitvector;
+	t_dpoint			unitvector;
 	const double	x = vec.x;
 	const double	y = vec.y;
 	const double	length = sqrt(x * x + y * y);
@@ -35,10 +35,10 @@ t_point	getpuv(t_point vec)
 }
 
 
-t_point	*init_point(double x, double y){
-	t_point	*new_point;
+t_dpoint	*init_dpoint(double x, double y){
+	t_dpoint	*new_point;
 
-	new_point = (t_point *)malloc(sizeof(t_point));
+	new_point = (t_dpoint *)malloc(sizeof(t_dpoint));
 	new_point->x = x;
 	new_point->y = y;
 	return (new_point);
@@ -48,8 +48,8 @@ t_point	*init_point(double x, double y){
 // int main(){
 // 	//t_mat2	a,b;
 
-// 	t_point	*p;
-// 	p = init_point(5, 3);
+// 	t_dpoint	*p;
+// 	p = init_dpoint(5, 3);
 // 	rotate_point(p, M_PI/2);
 // 	printf("x = %lf, y = %lf", p->x, p->y);
 // 	//a = init_mat2(1,2,3,4);

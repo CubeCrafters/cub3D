@@ -6,13 +6,13 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:13:41 by taerakim          #+#    #+#             */
-/*   Updated: 2024/08/18 14:04:51 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:02:27 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3D.h"
+#include "./raycasting/render.h"
 #include "./raycasting/matrix.h"
-
 #include <stdio.h>
 
 void	cub3d_log(t_info *info){
@@ -24,14 +24,6 @@ void	cub3d_log(t_info *info){
 		}
 		printf("\n");
 	}
-}
-
-void	print_error(char *s)
-{
-	ft_putendl_fd("Error", 2);
-	if (s)
-		ft_putendl_fd(s, 2);
-	exit(1);
 }
 
 int key_press(int keycode, t_info *info)
@@ -82,18 +74,10 @@ int main(int ac, char **av)
 	if (ac != 2)
 		print_error("this program takes one parameter");
 	ft_bzero(&info, sizeof(t_info));
-	init_info(&info);
-		// info.mlx = mlx_init();
-		// if (info.mlx == NULL)
-		// 	return(1);
+	init_mlx_datas(&info);
 	read_arg(av, &info);
-	cub3d_log(&info);
-		//info.win = mlx_new_window(info.mlx, 100, 100, "Hello world!");
-		// if (info.win == NULL)
-		// 	printf("!!!!!");//
-		//info.img = mlx_new_image(info.mlx, 100, 100);
+	//cub3d_log(&info);
 	mlx_hook(info.win, X_EVENT_KEY, 0, &exit_game, &info);
-		// mlx_key_hook(info.win, key_press, &info);
 	mlx_key_hook(info.win, key_press, &info);
 	mlx_hook(info.win, 2, (1L<<0)  , key_press, &info);
 	mlx_loop_hook(info.mlx, (void *)draw, &info);

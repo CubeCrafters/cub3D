@@ -33,7 +33,7 @@ void ray_casting(t_info *info)
 	double dirX = info->user->dir.x;
 	double dirY = info->user->dir.y;
 
-	t_point plane = getpuv(info->user->dir);
+	t_dpoint plane = getpuv(info->user->dir);
 	double planeX = plane.x;
 	double planeY = plane.y;
 

@@ -18,7 +18,7 @@ typedef int	t_fd;
 typedef struct s_point{
 	double	x;
 	double	y;
-}	t_point;
+}	t_dpoint;
 
 typedef struct s_data{
 	void	*img;
@@ -35,9 +35,9 @@ typedef struct s_rgb{
 }	t_rgb;
 
 typedef struct s_user{
-	t_point	pos;
-	t_point	dir;
-	t_point	camera;
+	t_dpoint	pos;
+	t_dpoint	dir;
+	t_dpoint	camera;
 }	t_user;
 
 typedef struct s_info{

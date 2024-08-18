@@ -2,165 +2,109 @@
 #include <mlx.h>
 #include <unistd.h>
 #include "../cub3D.h"
+#include "render.h"
 #include "matrix.h"
 #include <stdlib.h>
 #include <math.h>
 #include <sys/time.h>
 
-static void verLine_tex(t_info *info, int x, int drawStart, int drawEnd, double wallX, int side, t_data *texture)
+long long diff_tv(struct timeval *tv1, struct timeval *tv2)
 {
-    int texWidth = texture->width;
-    int texHeight = texture->height;
-
-    int texX = (int)(wallX * (double)texWidth);
-    if ((side == 0 && info->user->dir.x > 0) || (side == 2 && info->user->dir.y < 0))
-        texX = texWidth - texX - 1;
-
-    double step = 1.0 * texHeight / (drawEnd - drawStart);
-    double texPos = (drawStart - SCREEN_HEIGHT / 2 + (drawEnd - drawStart) / 2) * step;
-
-    for (int y = drawStart; y < drawEnd; y++)
-    {
-        int texY = (int)texPos & (texHeight - 1);
-        texPos += step;
-
-        char *pixel = texture->addr + (texY * texture->line_length + texX * (texture->bits_per_pixel / 8));
-        int color = *(unsigned int *)pixel;
-
-        if (side == 1 || side == 2)
-            color = (color >> 1) & 0x7F7F7F;
-
-        my_mlx_pixel_put(&info->img, x, y, color);
-    }
-}
-long long	diff_tv(struct timeval *tv1, struct timeval	*tv2)
-{
-	long long	sec_diff;
-	long long	usec_diff;
+	long long sec_diff;
+	long long usec_diff;
 
 	sec_diff = tv1->tv_sec - tv2->tv_sec;
 	usec_diff = tv1->tv_usec - tv2->tv_usec;
 	return (sec_diff * 1000000 + usec_diff);
 }
+
+static t_data *get_texture(t_info *info, int side)
+{
+	t_data *texture;
+	if (side == 1)
+		texture = &info->ea;
+	else if (side == 2)
+		texture = &info->we;
+	else if (side == 3)
+		texture = &info->so;
+	else
+		texture = &info->no;
+	return texture;
+}
+
+static void verLine_tex(t_info *info, t_render *data, int x, double wallX)
+{
+	const t_data *texture = get_texture(info, data->side);
+	int texX = (int)(wallX * (double)texture->width);
+	int texY;
+	char *pixel;
+
+	if ((data->side == 0 && info->user->dir.x > 0) || (data->side == 2 && info->user->dir.y < 0))
+		texX = texture->width - texX - 1;
+	double step = 1.0 * texture->height / (data->drawend - data->drawstart);
+	double texPos = (data->drawstart - SCREEN_HEIGHT / 2 + (data->drawend - data->drawstart) / 2) * step;
+	for (int y = data->drawstart; y < data->drawend; y++)
+	{
+		texY = (int)texPos & (texture->height - 1);
+		texPos += step;
+		pixel = texture->addr + (texY * texture->line_length + texX * (texture->bits_per_pixel / 8));
+		my_mlx_pixel_put(&info->img, x, y, *(unsigned int *)pixel);
+	}
+}
+
+void set_data(t_info *info, t_render *data, int x)
+{
+	data->camera = 2 * x / (double)SCREEN_WIDTH - 1;
+	data->raydir.x = info->user->dir.x + data->plane.x * data->camera;
+	data->raydir.y = info->user->dir.y + data->plane.y * data->camera;
+	data->map.x = (int)info->user->pos.x;
+	data->map.y = (int)info->user->pos.y;
+	data->deltadist.x = fabs(1 / data->raydir.x);
+	data->deltadist.y = fabs(1 / data->raydir.y);
+	if (data->raydir.x < 0)
+	{
+		data->step.x = -1;
+		data->sidedist.x = (info->user->pos.x - data->map.x) * data->deltadist.x;
+	}
+	else
+	{
+		data->step.x = 1;
+		data->sidedist.x = (data->map.x + 1.0 - info->user->pos.x) * data->deltadist.x;
+	}
+	if (data->raydir.y < 0)
+	{
+		data->step.y = -1;
+		data->sidedist.y = (info->user->pos.y - data->map.y) * data->deltadist.y;
+		return;
+	}
+	data->step.y = 1;
+	data->sidedist.y = (data->map.y + 1.0 - info->user->pos.y) * data->deltadist.y;
+}
+
 void ray_casting(t_info *info)
 {
-    struct timeval oldtime;
+	t_render data;
 
-    double posX = info->user->pos.x;
-    double posY = info->user->pos.y;
-    double dirX = info->user->dir.x;
-    double dirY = info->user->dir.y;
+	double wallX;
+	data.plane = getpuv(info->user->dir);
+	for (int x = 0; x < SCREEN_WIDTH; x++)
+	{
+		set_data(info, &data, x);
+		calc_side(info, &data);
+		calc_lineheight(info, &data);
 
-    t_point plane = getpuv(info->user->dir);
-    double planeX = plane.x;
-    double planeY = plane.y;
-
-    double rayDirX;
-    double rayDirY;
-    for (int x = 0; x < SCREEN_WIDTH; x++)
-    {
-        double cameraX = 2 * x / (double)SCREEN_WIDTH - 1;
-        rayDirX = dirX + planeX * cameraX;
-        rayDirY = dirY + planeY * cameraX;
-
-        int mapX = (int)posX;
-        int mapY = (int)posY;
-
-        double sideDistX;
-        double sideDistY;
-
-        double deltaDistX = fabs(1 / rayDirX);
-        double deltaDistY = fabs(1 / rayDirY);
-
-        double perpWallDist;
-
-        int stepX;
-        int stepY;
-        int hit = 0;
-        int side;
-
-        if (rayDirX < 0)
-        {
-            stepX = -1;
-            sideDistX = (posX - mapX) * deltaDistX;
-        }
-        else
-        {
-            stepX = 1;
-            sideDistX = (mapX + 1.0 - posX) * deltaDistX;
-        }
-        if (rayDirY < 0)
-        {
-            stepY = -1;
-            sideDistY = (posY - mapY) * deltaDistY;
-        }
-        else
-        {
-            stepY = 1;
-            sideDistY = (mapY + 1.0 - posY) * deltaDistY;
-        }
-
-        while (hit == 0)
-        {
-            if (sideDistX < sideDistY)
-            {
-                sideDistX += deltaDistX;
-                mapX += stepX;
-                if (rayDirX > 0)
-                    side = 0;
-                else
-                    side = 1;
-            }
-            else
-            {
-                sideDistY += deltaDistY;
-                mapY += stepY;
-                if (rayDirY > 0)
-                    side = 2;
-                else
-                    side = 3;
-            }
-            if (info->map[mapX][mapY] == '1')
-                hit = 1;
-        }
-
-        if (side <= 1)
-            perpWallDist = (mapX - posX + (1 - stepX) / 2) / rayDirX;
-        else
-            perpWallDist = (mapY - posY + (1 - stepY) / 2) / rayDirY;
-
-        int lineHeight = (int)(SCREEN_HEIGHT / perpWallDist);
-
-        int drawStart = -lineHeight / 2 + SCREEN_HEIGHT / 2;
-        if (drawStart < 0)
-            drawStart = 0;
-        int drawEnd = lineHeight / 2 + SCREEN_HEIGHT / 2;
-        if (drawEnd >= SCREEN_HEIGHT)
-            drawEnd = SCREEN_HEIGHT - 1;
-
-        double wallX;
-        if (side <= 1)
-            wallX = posY + perpWallDist * rayDirY;
-        else
-            wallX = posX + perpWallDist * rayDirX;
-        wallX -= floor(wallX);
-
-        t_data *texture;
-        if (side == 1)
-            texture = &info->ea;
-        else if (side == 2)
-            texture = &info->we;
-        else if (side == 3)
-            texture = &info->so;
-        else
-            texture = &info->no;
-
-        verLine_tex(info, x, drawStart, drawEnd, wallX, side, texture);
-    }
-    
-    oldtime = info->time;
-    gettimeofday(&info->time, NULL);
-    double frameTime = diff_tv(&info->time, &oldtime) / 1000000.0;
-    info->movespeed = frameTime * 5.0;
-    info->rotspeed = frameTime * 3.0;
+		data.drawstart = -data.lineheight / 2 + SCREEN_HEIGHT / 2;
+		// if (data.drawstart < 0)
+		// 	data.drawstart = 0;
+		data.drawend = data.lineheight / 2 + SCREEN_HEIGHT / 2;
+		// if (data.drawend >= SCREEN_HEIGHT)
+		// 	data.drawend = SCREEN_HEIGHT - 1;
+		if (data.side <= 1)
+			wallX = info->user->pos.y + data.perpwalldist * data.raydir.y;
+		else
+			wallX = info->user->pos.x + data.perpwalldist * data.raydir.x;
+		wallX -= floor(wallX);
+		verLine_tex(info, &data, x, wallX);
+	}
+	calc_render_speed(info);
 }

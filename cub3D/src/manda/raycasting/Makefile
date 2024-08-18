@@ -6,10 +6,11 @@ ifndef SRCDIR
 endif
 
 NAME := raycasting.a
-HEAD := matrix.h
+HEAD := render.h
 SRCS := test.c \
 		matrix.c \
 		ray.c \
+		ray_calc.c \
 
 LDLIBS := -lft
 
