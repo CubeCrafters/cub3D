@@ -6,7 +6,7 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:09:26 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/11 20:50:53 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/18 13:47:23 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,43 @@ typedef struct s_data{
 	int		height;     // 텍스처 이미지의 높이
 }	t_data;
 
-typedef struct s_info{
-	void		*mlx;
-	void		*win;
-	t_data		img;
-	void		*no;//t_fd		no;
-	void		*so;//t_fd		so;
-	void		*ea;//t_fd		ea;
-	void		*we;//t_fd		we;
-	int			floor;// t_rgb		floor;
-	int			ceiling;// t_rgb		ceiling;
-	char		**map;
-	int			hori;
-	int			vert;
-	t_user		*user;
-	double		movespeed;
-	double		rotspeed;
-	struct timeval time;
-}	t_info;
+// typedef struct s_info{
+// 	void		*mlx;
+// 	void		*win;
+// 	t_data		img;
+// 	void		*no;//t_fd		no;
+// 	void		*so;//t_fd		so;
+// 	void		*ea;//t_fd		ea;
+// 	void		*we;//t_fd		we;
+// 	int			floor;// t_rgb		floor;
+// 	int			ceiling;// t_rgb		ceiling;
+// 	char		**map;
+// 	int			hori;
+// 	int			vert;
+// 	t_user		*user;
+// 	double		movespeed;
+// 	double		rotspeed;
+// 	struct timeval time;
+// }	t_info;
+
+typedef struct s_info {
+    void *mlx;
+    void *win;
+    t_data img;
+    t_data no;       // void* 대신 t_data 사용
+    t_data so;
+    t_data ea;
+    t_data we;
+    int floor;
+    int ceiling;
+    char **map;
+    int hori;
+    int vert;
+    t_user *user;
+    double movespeed;
+    double rotspeed;
+    struct timeval time;
+} t_info;
 
 void	print_error(char *s);
 void	read_arg(char **av, t_info *info);
