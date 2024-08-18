@@ -6,7 +6,7 @@
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:24:26 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/09 11:32:29 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/18 12:51:25 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_extension(char *file)
 	int	len;
 
 	len = ft_strlen(file);
-	if (len < 4)
+	if (len < 5)
 		print_error("file with the .cub extension only");
 	if (ft_strncmp(file + (len - 4), ".cub", 4))
 		print_error("file with the .cub extension only");
