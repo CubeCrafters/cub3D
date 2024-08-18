@@ -7,10 +7,10 @@ endif
 
 NAME := raycasting.a
 HEAD := render.h
-SRCS := test.c \
-		matrix.c \
+SRCS :=	matrix.c \
 		ray.c \
 		ray_calc.c \
+		test.c \
 
 LDLIBS := -lft
 

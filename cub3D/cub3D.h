@@ -6,7 +6,7 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:09:26 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/18 19:56:40 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:34:28 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_dpoint{
 
 typedef struct s_ipoint{
 	int	x;
-	int y;
+	int	y;
 }	t_ipoint;
 typedef struct s_user{
 	t_dpoint	pos;
@@ -120,6 +120,6 @@ void	read_arg(char **av, t_info *info);
 void	init_info(t_info *info);
 
 
-t_user	*set_user(double pos_x, double pos_y, char dir);
+t_user	*set_user(int pos_x, int pos_y, char dir);
 void	init_mlx_datas(t_info *info);
 #endif

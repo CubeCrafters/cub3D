@@ -9,6 +9,7 @@ NAME := utils.a
 HEAD := utils.h
 SRCS := mlx_utils.c \
 		cub3d_utils.c \
+		key_events.c \
 
 LDLIBS := -lft
 

@@ -6,13 +6,14 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:13:41 by taerakim          #+#    #+#             */
-/*   Updated: 2024/08/18 20:02:27 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:17:02 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3D.h"
 #include "./raycasting/render.h"
 #include "./raycasting/matrix.h"
+#include "./utils/utils.h"
 #include <stdio.h>
 
 void	cub3d_log(t_info *info){
@@ -26,7 +27,7 @@ void	cub3d_log(t_info *info){
 	}
 }
 
-int key_press(int keycode, t_info *info)
+int	key_press(int keycode, t_info *info)
 {
 	if (keycode == KEY_ESC)
 	{
@@ -34,29 +35,19 @@ int key_press(int keycode, t_info *info)
 		exit(0);
 	}
 	if (keycode == KEY_W)
-	{
-		if (info->map[(int)(info->user->pos.x +info->movespeed * info->user->dir.x)][(int)(info->user->pos.y + info->movespeed * info->user->dir.y)] != '1'){
-		info->user->pos.x += info->movespeed * info->user->dir.x;
-		info->user->pos.y += info->movespeed * info->user->dir.y;
-		}
-	}
+		key_w(info);
 	if (keycode == KEY_S)
-	{ // ESC 키의 keycode는 53
-		if (info->map[(int)(info->user->pos.x - info->movespeed * info->user->dir.x)][(int)(info->user->pos.y - info->movespeed * info->user->dir.y)] != '1'){
-			info->user->pos.x -= info->movespeed * info->user->dir.x;
-			info->user->pos.y -= info->movespeed * info->user->dir.y;\
-		}
-	}
+		key_s(info);
 	if (keycode == KEY_A)
 		rotate_point(&info->user->dir, -info->rotspeed);
 	if (keycode == KEY_D)
 		rotate_point(&info->user->dir, info->rotspeed);
 	mlx_clear_window(info->mlx, info->win);
 	info->img.img = mlx_new_image(info->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	info->img.addr = mlx_get_data_addr(info->img.img, &(info->img).bits_per_pixel, \
-	&info->img.line_length, &info->img.endian);
+	info->img.addr = mlx_get_data_addr(info->img.img, \
+	&(info->img).bits_per_pixel, &info->img.line_length, &info->img.endian);
 	draw(info);
-	return 0;
+	return (0);
 }
 
 int	exit_game(int key_val, t_info *data)
@@ -67,7 +58,7 @@ int	exit_game(int key_val, t_info *data)
 	return (0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_info	info;
 
@@ -79,7 +70,7 @@ int main(int ac, char **av)
 	//cub3d_log(&info);
 	mlx_hook(info.win, X_EVENT_KEY, 0, &exit_game, &info);
 	mlx_key_hook(info.win, key_press, &info);
-	mlx_hook(info.win, 2, (1L<<0)  , key_press, &info);
+	mlx_hook(info.win, 2, (1L << 0), key_press, &info);
 	mlx_loop_hook(info.mlx, (void *)draw, &info);
 	mlx_loop(info.mlx);
 }

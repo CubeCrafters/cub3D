@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <math.h>
 
-
 static void	set_dir(t_user *user, char dir)
 {
 	if (dir == 'N')
@@ -30,11 +29,15 @@ static void	set_dir(t_user *user, char dir)
 	return ;
 }
 
-t_user	*set_user(double pos_x, double pos_y, char dir)
+t_user	*set_user(int x, int y, char dir)
 {
-	t_user	*user;
+	t_user			*user;
+	const double	pos_x = (double)x;
+	const double	pos_y = (double)y;
 
-	user = (t_user *)malloc(sizeof(user));
+	user = (t_user *)malloc(sizeof(t_user));
+	if (user == NULL)
+		print_error("Malloc Error");
 	user->pos.x = pos_x + 0.5;
 	user->pos.y = pos_y + 0.5;
 	set_dir(user, dir);
@@ -64,11 +67,3 @@ void	init_mlx_datas(t_info *info)
 	info->win = mlx_win;
 	info->img = img;
 }
-
-// void	init_info(t_info *info)
-// {
-// 	//t_user	*user;
-
-	
-	
-// }
