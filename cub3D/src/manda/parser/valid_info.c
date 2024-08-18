@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_info.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:57:27 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/09 12:20:30 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/11 20:03:57 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ int	check_sides(int i, int j, t_info *info)
 int	check_cell(int i, int j, t_info *info, t_check *ch)
 {
 	char	c;
-
+	t_user	*user;
 	c = info->map[i][j];
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 	{
+		user = set_user(i, j, c);
+		info->user = user;
 		(ch->s)++;
 		return (check_sides(i, j, info));
 	}

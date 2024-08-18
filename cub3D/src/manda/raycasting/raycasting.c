@@ -109,7 +109,7 @@ void ray_casting(t_info *info)
 					side = 3;
 			}
 			// Check if ray has hit a wall
-			if (info->map[mapX][mapY] > 0)
+			if (info->map[mapX][mapY] == '1')
 				hit = 1;
 		}
 		// Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
@@ -140,7 +140,7 @@ void ray_casting(t_info *info)
 	oldtime = info->time;
 	gettimeofday(&info->time, NULL);
     double frameTime = diff_tv(&info->time, &oldtime) / 1000000.0; //frameTime is the time this frame has taken, in seconds
-    printf("%lf\n",frameTime); //FPS counter
+    //printf("%lf\n",frameTime); //FPS counter
     // redraw();
     // cls();
 

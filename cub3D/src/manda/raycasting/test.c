@@ -35,7 +35,7 @@
 void draw(t_info *info){
 	ray_casting(info);
 	
-	mlx_put_image_to_window(info->mlx, info->mlx_win, info->img.img, 0, 0);
+	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
 }
 
 // void foo(){

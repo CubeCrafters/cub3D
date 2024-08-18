@@ -22,7 +22,7 @@ int key_press(int keycode, t_info *info)
 {
 	if (keycode == KEY_ESC)
 	{
-		mlx_destroy_window(info->mlx, info->mlx_win);
+		mlx_destroy_window(info->mlx, info->win);
 		exit(0);
 	}
 	if (keycode == KEY_W)
@@ -38,7 +38,7 @@ int key_press(int keycode, t_info *info)
 		rotate_point(&info->user->dir, -info->rotspeed);
 	if (keycode == KEY_D)
 		rotate_point(&info->user->dir, info->rotspeed);
-	mlx_clear_window(info->mlx, info->mlx_win);
+	mlx_clear_window(info->mlx, info->win);
 	info->img.img = mlx_new_image(info->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	info->img.addr = mlx_get_data_addr(info->img.img, &(info->img).bits_per_pixel, \
 	&info->img.line_length, &info->img.endian);

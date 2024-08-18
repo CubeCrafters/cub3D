@@ -19,7 +19,7 @@
 
 int	close_window(t_info *info)
 {
-	mlx_destroy_window(info->mlx, info->mlx_win);
+	mlx_destroy_window(info->mlx, info->win);
 	exit(0);
 	return (0);
 }
