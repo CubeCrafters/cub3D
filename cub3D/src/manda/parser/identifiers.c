@@ -6,7 +6,7 @@
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:14:03 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/18 12:22:50 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/18 12:49:33 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@ bool	get_color(char *s, t_info *info, char c)//컬러 포맷 바꾸기, 컬러 �
 	int		i;
 	int		rgb[3];
 
+	if (ft_strcmp(s, "") == 0)
+		print_error("wrong color");
 	tmp = ft_split(s, ',');
 	i = 0;
 	while (tmp[i] || i < 3)
 	{
 		rgb[i] = ft_atoi(tmp[i]);
 		if (cd_iscolor(rgb[i]) == 0)
-			print_error(NULL);
+			print_error("wrong color");
 		i++;
 	}
 	if (i != 3)
-		print_error(NULL);
+		print_error("wrong color");
 	if (c == 'f')
 		info->floor = rgb[0] * 256 * 256 + rgb[1] * 256 + rgb[2];
 	else
