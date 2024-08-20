@@ -5,11 +5,14 @@ ifndef SRCDIR
 	SRCDIR = $(abspath ../)
 endif
 
-NAME := raycasting.a
-HEAD := render.h
+NAME := render.a
+HEAD := render.h \
+		matrix.h \
+
 SRCS :=	matrix.c \
 		ray.c \
 		ray_calc.c \
+		ray_utils.c \
 
 LDLIBS := -lft
 

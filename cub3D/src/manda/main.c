@@ -6,26 +6,15 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 18:13:41 by taerakim          #+#    #+#             */
-/*   Updated: 2024/08/18 21:17:02 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/21 07:07:26 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-#include "./raycasting/render.h"
-#include "./raycasting/matrix.h"
-#include "./utils/utils.h"
+#include "render.h"
+#include "matrix.h"
+#include "utils.h"
 #include <stdio.h>
-
-void	cub3d_log(t_info *info){
-	printf("%d : \n",info->hori);
-	printf("%d : \n",info->vert);
-	for(int i = 0; i<info->vert;i++){
-		for(int j = 0 ;j < info->hori;j++){
-			printf("%c",info->map[i][j]);
-		}
-		printf("\n");
-	}
-}
 
 int	key_press(int keycode, t_info *info)
 {
@@ -67,7 +56,6 @@ int	main(int ac, char **av)
 	ft_bzero(&info, sizeof(t_info));
 	init_mlx_datas(&info);
 	read_arg(av, &info);
-	//cub3d_log(&info);
 	mlx_hook(info.win, X_EVENT_KEY, 0, &exit_game, &info);
 	mlx_key_hook(info.win, key_press, &info);
 	mlx_hook(info.win, 2, (1L << 0), key_press, &info);

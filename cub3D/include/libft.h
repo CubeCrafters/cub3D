@@ -1,1 +1,0 @@
-/Users/sehwanii/Desktop/work/cub3D/cub3D/lib/libft/libft.h

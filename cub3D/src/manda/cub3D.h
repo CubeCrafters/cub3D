@@ -6,7 +6,7 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:09:26 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/18 21:34:28 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/21 07:05:39 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include "./lib/libft/libft.h"
+# include "libft.h"
 # include <sys/time.h>
 // typedef int	t_fd;
 
@@ -59,61 +59,44 @@ typedef struct s_data{
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		width;      // 텍스처 이미지의 너비
-	int		height;     // 텍스처 이미지의 높이
+	int		width;
+	int		height;
 }	t_data;
 
 typedef struct s_render{
-	t_dpoint plane;
-	t_dpoint raydir;
-	t_dpoint sidedist;
-	double	camera;
-	t_dpoint deltadist;
+	t_dpoint	plane;
+	t_dpoint	raydir;
+	t_dpoint	sidedist;
+	double		camera;
+	t_dpoint	deltadist;
 	t_ipoint	step;
 	t_ipoint	map;
-	int	side;
-	int	lineheight;
-	int	drawstart;
-	int drawend;
-	double	perpwalldist;
+	int			side;
+	int			lineheight;
+	int			drawstart;
+	int			drawend;
+	double		perpwalldist;
+	t_ipoint	tex;
 }	t_render;
-// typedef struct s_info{
-// 	void		*mlx;
-// 	void		*win;
-// 	t_data		img;
-// 	void		*no;//t_fd		no;
-// 	void		*so;//t_fd		so;
-// 	void		*ea;//t_fd		ea;
-// 	void		*we;//t_fd		we;
-// 	int			floor;// t_rgb		floor;
-// 	int			ceiling;// t_rgb		ceiling;
-// 	char		**map;
-// 	int			hori;
-// 	int			vert;
-// 	t_user		*user;
-// 	double		movespeed;
-// 	double		rotspeed;
-// 	struct timeval time;
-// }	t_info;
 
 typedef struct s_info {
-    void *mlx;
-    void *win;
-    t_data img;
-    t_data no;       // void* 대신 t_data 사용
-    t_data so;
-    t_data ea;
-    t_data we;
-    int floor;
-    int ceiling;
-    char **map;
-    int hori;
-    int vert;
-    t_user *user;
-    double movespeed;
-    double rotspeed;
-    struct timeval time;
-} t_info;
+	void			*mlx;
+	void			*win;
+	t_data			img;
+	t_data			no;
+	t_data			so;
+	t_data			ea;
+	t_data			we;
+	int				floor;
+	int				ceiling;
+	char			**map;
+	int				hori;
+	int				vert;
+	t_user			*user;
+	double			movespeed;
+	double			rotspeed;
+	struct timeval	time;
+}	t_info;
 
 void	print_error(char *s);
 void	read_arg(char **av, t_info *info);

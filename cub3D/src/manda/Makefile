@@ -11,7 +11,7 @@ SRCS := main.c	\
 
 # SRCS(in SRCDIR) ------
 DIRS := parser \
-		raycasting	\
+		render	\
 		utils	\
 
 SUBS := $(addsuffix .a,$(DIRS))
