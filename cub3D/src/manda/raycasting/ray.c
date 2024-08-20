@@ -81,7 +81,7 @@ void	color_background(t_info *info)
 	}
 }
 
-void	ray_casting(t_info *info)
+void	draw(t_info *info)
 {
 	t_render	data;
 	double		wall_x;
@@ -106,4 +106,5 @@ void	ray_casting(t_info *info)
 		x++;
 	}
 	calc_render_speed(info);
+	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
 }

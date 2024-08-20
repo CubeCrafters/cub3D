@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3D.h"
+#include "cub3D.h"
 #include "./raycasting/render.h"
 #include "./raycasting/matrix.h"
 #include "./utils/utils.h"

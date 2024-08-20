@@ -10,7 +10,6 @@ HEAD := render.h
 SRCS :=	matrix.c \
 		ray.c \
 		ray_calc.c \
-		test.c \
 
 LDLIBS := -lft
 

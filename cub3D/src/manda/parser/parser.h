@@ -15,7 +15,7 @@
 
 # include <stdbool.h>
 # include <stdlib.h>
-# include "../../../cub3D.h"
+# include "../cub3D.h"
 
 typedef struct s_check
 {

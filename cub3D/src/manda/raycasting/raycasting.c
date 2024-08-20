@@ -147,4 +147,5 @@ void ray_casting(t_info *info)
     //speed modifiers
     info->movespeed = frameTime * 5.0; //the constant value is in squares/second
     info->rotspeed = frameTime * 3.0;
+	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
 }

@@ -1,7 +1,7 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "../../../cub3D.h"
+# include "../cub3D.h"
 
 # define DESTROY_NOTIFY	17
 
