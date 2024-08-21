@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"unistd.h": "c",
+		"cub3d.h": "c",
+		"math.h": "c",
+		"stdio.h": "c",
+		"matrix.h": "c",
+		"utils.h": "c",
+		"stdlib.h": "c",
+		"mlx.h": "c",
+		"parser.h": "c"
+	}
+}

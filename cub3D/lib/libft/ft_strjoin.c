@@ -3,35 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taerakim <taerakim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 13:58:02 by taerakim          #+#    #+#             */
-/*   Updated: 2024/02/08 19:47:27 by taerakim         ###   ########.fr       */
+/*   Created: 2023/10/08 21:21:38 by inryu             #+#    #+#             */
+/*   Updated: 2024/08/01 14:19:29 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *dest, char *src)
 {
-	const size_t	s1_len = ft_strlen(s1);
-	const size_t	s2_len = ft_strlen(s2);
-	char			*res;
-	size_t			idx;
+	int		dest_len;
+	int		src_len;
+	char	*ret;
+	int		i;
 
-	res = (char *)ft_malloc(sizeof(char) * (s1_len + s2_len + 1));
-	idx = 0;
-	while (idx < s1_len)
+	dest_len = ft_strlen(dest);
+	src_len = ft_strlen(src);
+	ret = malloc(dest_len + src_len + 1);
+	if (!ret)
+		return (NULL);
+	i = 0;
+	while (i < dest_len)
 	{
-		res[idx] = s1[idx];
-		idx++;
+		ret[i] = dest[i];
+		i++;
 	}
-	idx = 0;
-	while (idx < s2_len)
+	i = 0;
+	while (i < src_len)
 	{
-		res[s1_len + idx] = s2[idx];
-		idx++;
+		ret[dest_len + i] = src[i];
+		i++;
 	}
-	res[s1_len + s2_len] = '\0';
-	return (res);
+	ret[dest_len + src_len] = '\0';
+	return (ret);
 }

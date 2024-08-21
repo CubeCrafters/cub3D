@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../cub3D.h"
 #include <stdlib.h>
 #include <mlx.h>
 #include <stdio.h>
@@ -26,15 +26,39 @@ static void	exit_msg(const char *str)
 	exit(1);
 }
 
-static t_user	*set_user(double pos_x, double pos_y, double dir_x, double dir_y)
+static void	set_dir(t_user *user, char dir)
+{
+	if (dir == 'N')
+	{
+		user->dir.x = -1.0;
+		user->dir.y = 0;
+	}
+	if (dir == 'E')
+	{
+		user->dir.x = 0;
+		user->dir.y = 1.0;
+	}
+	if (dir == 'W')
+	{
+		user->dir.x = 0;
+		user->dir.y = -1.0;
+	}
+	if (dir == 'S')
+	{
+		user->dir.x = 1.0;
+		user->dir.y = 0;
+	}
+	return ;
+}
+
+t_user	*set_user(double pos_x, double pos_y, char dir)
 {
 	t_user	*user;
 
 	user = (t_user *)malloc(sizeof(user));
-	user->pos.x = pos_x;
-	user->pos.y = pos_y;
-	user->dir.x = dir_x;
-	user->dir.y = dir_y;
+	user->pos.x = pos_x + 0.5;
+	user->pos.y = pos_y + 0.5;
+	set_dir(user, dir);
 	user->camera.x = fabs(pos_y) / sqrt(pos_x * pos_x + pos_y * pos_y);
 	user->camera.y = -fabs(pos_x) / sqrt(pos_x * pos_x + pos_y * pos_y);
 	return (user);
@@ -58,17 +82,17 @@ static void	init_mlx_datas(t_info *info)
 	img.addr = mlx_get_data_addr(img.img, &(img).bits_per_pixel, \
 	&img.line_length, &img.endian);
 	info->mlx = mlx;
-	info->mlx_win = mlx_win;
+	info->win = mlx_win;
 	info->img = img;
-	info->map = maze;
+	//info->map = maze;
 }
 
 void	init_info(t_info *info)
 {
-	t_user	*user;
+	//t_user	*user;
 
 	init_mlx_datas(info);
-	user = set_user(4.0, 1.0, 0.0, 1.0);//parse
-	info->user = user;
+	// user = set_user(4.0, 1.0, 0.0, 1.0);//parse
+	// info->user = user;
 	gettimeofday(&info->time, NULL);
 }

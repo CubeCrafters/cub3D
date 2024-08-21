@@ -5,12 +5,13 @@ ifndef SRCDIR
 	SRCDIR = $(abspath ./)
 endif
 
-NAME := cub3d
+NAME := cub3D
 SRCS := main.c	\
 		init.c	\
 
 # SRCS(in SRCDIR) ------
-DIRS := raycasting	\
+DIRS := parser \
+		raycasting	\
 		utils	\
 
 SUBS := $(addsuffix .a,$(DIRS))
@@ -21,4 +22,3 @@ LDLIBS := -lft -lreadline -L./mlx -lmlx -framework OpenGL -framework AppKit
 include $(TOPDIR)/include_make/Variable.mk
 include $(TOPDIR)/include_make/Link.mk
 include $(TOPDIR)/include_make/Recipe_src.mk
-
