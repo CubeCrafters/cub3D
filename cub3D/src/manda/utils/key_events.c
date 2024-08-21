@@ -6,11 +6,13 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 07:00:16 by sehwjang          #+#    #+#             */
-/*   Updated: 2024/08/21 13:32:17 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:39:10 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+#include "matrix.h"
+#include "render.h"
 
 int	key_press(int keycode, t_info *info)
 {

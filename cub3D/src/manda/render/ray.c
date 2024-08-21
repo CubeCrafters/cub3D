@@ -6,7 +6,7 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 07:02:17 by sehwjang          #+#    #+#             */
-/*   Updated: 2024/08/21 13:30:55 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:40:56 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ static t_data	*get_texture(t_info *info, int side)
 	t_data	*texture;
 
 	if (side == 1)
-		texture = &info->ea;
-	else if (side == 2)
-		texture = &info->so;
-	else if (side == 3)
-		texture = &info->so;
-	else
 		texture = &info->no;
+	else if (side == 2)
+		texture = &info->we;
+	else if (side == 3)
+		texture = &info->ea;
+	else
+		texture = &info->so;
 	return (texture);
 }
 
