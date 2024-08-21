@@ -7,7 +7,7 @@ BONUS = bonus
 
 clean fclean norminette:
 	$(MAKE) TOPDIR=$(TOPDIR) -C $(MANDATORY) $@
-#$(MAKE) TOPDIR=$(TOPDIR) -C $(BONUS) $@
+	$(MAKE) TOPDIR=$(TOPDIR) -C $(BONUS) $@
 
 all re:
 	$(MAKE) TOPDIR=$(TOPDIR) -C $(MANDATORY) $@
