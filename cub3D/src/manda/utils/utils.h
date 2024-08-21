@@ -6,7 +6,7 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 07:00:25 by sehwjang          #+#    #+#             */
-/*   Updated: 2024/08/21 13:33:08 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:19:46 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ int		exit_game(int key_val, t_info *data);
 int		key_press(int keycode, t_info *info);
 void	key_w(t_info *info);
 void	key_s(t_info *info);
+int		ft_strcmp(char *s1, char *s2);
+void	free_strings(char **d);
 
 #endif
