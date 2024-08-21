@@ -6,12 +6,12 @@
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:56:54 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/09 11:36:34 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/21 13:40:09 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CD_PARSER_H
-# define CD_PARSER_H
+#ifndef PARSER_H
+# define PARSER_H
 
 # include <stdbool.h>
 # include <stdlib.h>

@@ -6,13 +6,13 @@
 /*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:14:03 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/18 12:49:33 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/21 13:41:02 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-bool	get_color(char *s, t_info *info, char c)//컬러 포맷 바꾸기, 컬러 안 같게 막기
+bool	get_color(char *s, t_info *info, char c)
 {
 	char	**tmp;
 	int		i;
@@ -59,7 +59,7 @@ void	identifiers_we(char **d, t_info *info, t_check *ch, int i)
 		print_error("wrong element(s)");
 }
 
-void	identifiers(char *s, t_info *info, t_check *ch)//같은 파일 여러번 읽으려고 하면 막기
+void	identifiers(char *s, t_info *info, t_check *ch)
 {
 	char	**d;
 	int		i;
