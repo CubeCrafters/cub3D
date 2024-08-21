@@ -6,7 +6,7 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 07:02:17 by sehwjang          #+#    #+#             */
-/*   Updated: 2024/08/21 07:09:03 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:30:55 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_data	*get_texture(t_info *info, int side)
 	if (side == 1)
 		texture = &info->ea;
 	else if (side == 2)
-		texture = &info->we;
+		texture = &info->so;
 	else if (side == 3)
 		texture = &info->so;
 	else
@@ -65,7 +65,7 @@ static void	draw_ver_line(t_info *info, t_render *data, int x, double wallX)
 	data->tex.x = (int)(wallX * (double)texture->width);
 	if ((data->side == 0) || (data->side == 2))
 		data->tex.x = texture->width - data->tex.x - 1;
-	put_pixel(info, data, texture, x);
+	put_pixel(info, data, texture, SCREEN_WIDTH - x);
 }
 
 void	draw(t_info *info)

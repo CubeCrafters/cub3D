@@ -6,7 +6,7 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:09:26 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/21 07:05:39 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:33:41 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,6 @@
 # include <stdlib.h>
 # include "libft.h"
 # include <sys/time.h>
-// typedef int	t_fd;
-
-// typedef struct s_rgb{
-// 	unsigned char	r;
-// 	unsigned char	g;
-// 	unsigned char	b;
-// }	t_rgb;
 
 typedef struct s_dpoint{
 	double	x;
@@ -101,7 +94,6 @@ typedef struct s_info {
 void	print_error(char *s);
 void	read_arg(char **av, t_info *info);
 void	init_info(t_info *info);
-
 
 t_user	*set_user(int pos_x, int pos_y, char dir);
 void	init_mlx_datas(t_info *info);

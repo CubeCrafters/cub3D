@@ -1,7 +1,7 @@
-NO ./texture/test1.xpm
-SO ./texture/wall.xpm
-WE ./texture/wall_big.xpm
-EA ./texture/tile.xpm
+NO ./texture/porto1.xpm
+SO ./texture/porto2.xpm
+WE ./texture/porto3.xpm
+EA ./texture/porto4.xpm
 
 F 0,255,0
 C 225,30,0
