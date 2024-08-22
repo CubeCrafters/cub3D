@@ -6,7 +6,7 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:09:26 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/22 15:29:03 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:06:11 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # define SCREEN_HEIGHT	640
-# define SCREEN_WIDTH	640
+# define SCREEN_WIDTH	1080
 
 # include <stdio.h>
 # include <mlx.h>

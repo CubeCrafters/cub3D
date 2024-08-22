@@ -6,7 +6,7 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 07:02:17 by sehwjang          #+#    #+#             */
-/*   Updated: 2024/08/22 15:39:21 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/22 17:15:01 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,17 @@ static void	put_pixel(t_info *info, t_render *data, t_data *texture, int x)
 	double	texpos;
 
 	step = 1.0 * texture->height / (data->drawend - data->drawstart);
-	texpos = (data->drawstart - SCREEN_HEIGHT / 2 + \
-				(data->drawend - data->drawstart) / 2) * step;
+	texpos = (data->drawstart - SCREEN_HEIGHT / 2 \
+			+ (data->drawend - data->drawstart) / 2) * step;
 	y = data->drawstart;
 	while (y < data->drawend)
 	{
-		data->tex.y = (int)texpos & (texture->height - 1);
+		data->tex.y = (int)texpos % texture->height;
+		if (data->tex.y < 0)
+			data->tex.y += texture->height;
 		texpos += step;
 		pixel = texture->addr + (data->tex.y * texture->line_length \
-								+ data->tex.x * (texture->bits_per_pixel / 8));
+							+ data->tex.x * (texture->bits_per_pixel / 8));
 		my_mlx_pixel_put(&info->img, x, y, *(unsigned int *)pixel);
 		y++;
 	}
