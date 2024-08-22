@@ -6,7 +6,7 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:09:26 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/21 16:42:20 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:28:39 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 
 # define SCREEN_HEIGHT	640
 # define SCREEN_WIDTH	640
-
-# define X_EVENT_KEY	17
-# define KEY_ESC		53
-# define KEY_W			13
-# define KEY_A			0
-# define KEY_S			1
-# define KEY_D			2
 
 # include <stdio.h>
 # include <mlx.h>
