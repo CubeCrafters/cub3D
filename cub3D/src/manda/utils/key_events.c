@@ -6,7 +6,7 @@
 /*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 07:00:16 by sehwjang          #+#    #+#             */
-/*   Updated: 2024/08/22 15:26:52 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:33:51 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ void	key_a(t_info *info)
 {
 	const t_dpoint	puv = getpuv(info->user->dir);
 
-	if (info->map[(int)(info->user->pos.x - \
-						- info->movespeed * info->user->dir.x)] \
-				[(int)(info->user->pos.y - info->movespeed \
-						* info->user->dir.y)] != '1')
+	if (info->map[(int)(info->user->pos.x + info->movespeed * puv.x)] \
+				[(int)(info->user->pos.y + info->movespeed * puv.y)] != '1')
 	{
 		info->user->pos.x += info->movespeed * puv.x;
 		info->user->pos.y += info->movespeed * puv.y;
@@ -83,10 +81,8 @@ void	key_d(t_info *info)
 {
 	const t_dpoint	puv = getpuv(info->user->dir);
 
-	if (info->map[(int)(info->user->pos.x - \
-						- info->movespeed * info->user->dir.x)] \
-				[(int)(info->user->pos.y - info->movespeed \
-						* info->user->dir.y)] != '1')
+	if (info->map[(int)(info->user->pos.x - info->movespeed * puv.x)] \
+				[(int)(info->user->pos.y - info->movespeed * puv.y)] != '1')
 	{
 		info->user->pos.x -= info->movespeed * puv.x;
 		info->user->pos.y -= info->movespeed * puv.y;

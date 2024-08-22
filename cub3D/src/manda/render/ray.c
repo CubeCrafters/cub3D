@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 07:02:17 by sehwjang          #+#    #+#             */
-/*   Updated: 2024/08/22 14:45:37 by inryu            ###   ########.fr       */
+/*   Updated: 2024/08/22 15:38:50 by sehwjang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	draw_ver_line(t_info *info, t_render *data, int x, double wallX)
 
 	texture = get_texture(info, data->side);
 	data->tex.x = (int)(wallX * (double)texture->width);
-	if ((data->side == 0) || (data->side == 2))
+	if ((data->side == 0) || (data->side == 3))
 		data->tex.x = texture->width - data->tex.x - 1;
 	put_pixel(info, data, texture, SCREEN_WIDTH - x);
 }
