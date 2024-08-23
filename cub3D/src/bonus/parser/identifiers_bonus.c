@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   identifiers_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:14:03 by inryu             #+#    #+#             */
-/*   Updated: 2024/08/23 14:31:33 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/23 14:57:09 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser_bonus.h"
+#include "utils_bonus.h"
 
 bool	get_color(char *s, t_info *info, char c)
 {
@@ -24,7 +25,7 @@ bool	get_color(char *s, t_info *info, char c)
 	i = 0;
 	while (tmp[i] || i < 3)
 	{
-		rgb[i] = ft_atoi(tmp[i]);
+		rgb[i] = cd_atoi(tmp[i]);
 		if (cd_iscolor(rgb[i]) == 0)
 			print_error("wrong color");
 		i++;

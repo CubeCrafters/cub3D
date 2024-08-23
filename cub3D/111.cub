@@ -3,7 +3,7 @@ SO ./texture/bound_south.xpm
 WE ./texture/bound_west.xpm
 EA ./texture/bound_east.xpm
 
-F 111,237,4294567496
+F 111,237,1
 C 0,255,0
 
         1111111111111111111111111

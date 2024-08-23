@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 07:00:25 by sehwjang          #+#    #+#             */
-/*   Updated: 2024/08/22 15:28:34 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/23 14:57:41 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ void	key_a(t_info *info);
 void	key_d(t_info *info);
 int		ft_strcmp(char *s1, char *s2);
 void	free_strings(char **d);
+int		cd_atoi(char *av);
 
 #endif

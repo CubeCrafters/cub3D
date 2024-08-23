@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sehwjang <sehwjang@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: inryu <inryu@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 07:00:08 by sehwjang          #+#    #+#             */
-/*   Updated: 2024/08/21 16:19:09 by sehwjang         ###   ########.fr       */
+/*   Updated: 2024/08/23 14:59:50 by inryu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,33 @@ void	free_strings(char **d)
 		i++;
 	}
 	free(d);
+}
+
+int	cd_atoi(char *av)
+{
+	int			i;
+	long long	res;
+
+	res = 0;
+	i = 0;
+	if (av[i] == '-' || av[i] == '+')
+	{
+		if (av[i++] == '-')
+			return (-1);
+	}
+	if ('0' <= av[i] && av[i] <= '9')
+	{
+		while ('0' <= av[i] && av[i] <= '9')
+		{
+			res = res * 10 + (av[i] - '0');
+			if (res > 2147483647)
+				return (-1);
+			i++;
+		}
+		if (av[i] != '\0')
+			return (-1);
+	}
+	else
+		return (-1);
+	return (res);
 }
